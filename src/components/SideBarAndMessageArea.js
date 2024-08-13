@@ -3,7 +3,7 @@ import Modal from './Modal';
 import Notes from './NotesArea';
 import banner from '../assets/Banner.png';
 import lock from '../assets/lock.png';
-import './SideBarAndMessageArea.css';  // Corrected filename if it was a typo
+import './SideBarAndMessageArea.css'; 
 
 // SideBar component that manages the groups and modal operations
 const SideBar = () => {
