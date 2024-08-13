@@ -1,6 +1,7 @@
 {
   "name": "react_module_test",
   "version": "0.1.0",
+  "homepage": "https:///amolkittur.github.io/PocketNotest",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
