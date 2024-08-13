@@ -26,7 +26,6 @@ const SideBar = () => {
     };
 
     window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
 
     // Function to fetch groups from local storage
     const fetchGroups = async () => {
@@ -37,6 +36,9 @@ const SideBar = () => {
     };
 
     fetchGroups();
+
+    // Cleanup function to remove event listener
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   // Handler for group selection
