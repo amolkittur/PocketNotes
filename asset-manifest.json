@@ -1,14 +1,14 @@
 {
   "files": {
-    "main.css": "/PocketNotest/static/css/main.0f3cd62c.css",
-    "main.js": "/PocketNotest/static/js/main.e7728c6f.js",
+    "main.css": "/PocketNotest/static/css/main.db7dd8cc.css",
+    "main.js": "/PocketNotest/static/js/main.371e2d80.js",
     "static/media/Banner.png": "/PocketNotest/static/media/Banner.051c5dd6cf08bd17366f.png",
     "index.html": "/PocketNotest/index.html",
-    "main.0f3cd62c.css.map": "/PocketNotest/static/css/main.0f3cd62c.css.map",
-    "main.e7728c6f.js.map": "/PocketNotest/static/js/main.e7728c6f.js.map"
+    "main.db7dd8cc.css.map": "/PocketNotest/static/css/main.db7dd8cc.css.map",
+    "main.371e2d80.js.map": "/PocketNotest/static/js/main.371e2d80.js.map"
   },
   "entrypoints": [
-    "static/css/main.0f3cd62c.css",
-    "static/js/main.e7728c6f.js"
+    "static/css/main.db7dd8cc.css",
+    "static/js/main.371e2d80.js"
   ]
 }
