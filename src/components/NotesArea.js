@@ -3,151 +3,94 @@ import sendIcon from '../assets/send.png';
 import back from '../assets/back.png';
 import styles from './NotesArea.module.css';
 
-const NotesArea = (props) => {
+// Component for managing notes within a selected group
+const NotesArea = ({ groupSelect, groups, setGroups }) => {
+  // State to manage individual note input
   const [note, setNote] = useState('');
 
-  let groupSelect = props.groupSelect;
-  let notes = groupSelect.notes;
-  let groups = props.groups;
-  let setGroups = props.setGroups;
+  // State to manage screen size for responsive layout
+  const [screenSize, setScreenSize] = useState({
+    width: window.innerWidth,
+    height: window.innerHeight,
+  });
 
-  const getScreen = () => {
-    return {
-      width: window.innerWidth,
-      height: window.innerHeight,
-    };
-  };
-  const [screenSize, setScreenSize] = useState(getScreen());
-
+  // Update screenSize when window resizes
   useEffect(() => {
-    const Screen = () => {
-      setScreenSize(getScreen());
+    const handleResize = () => {
+      setScreenSize({
+        width: window.innerWidth,
+        height: window.innerHeight,
+      });
     };
-    window.addEventListener('resize', Screen);
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
-  const handleChange = (e) => {
-    setNote(e.target.value);
+  // Function to update note value on user input
+  const handleChange = (event) => {
+    setNote(event.target.value);
   };
 
+  // Function to add a new note to the group
   const handleSubmit = () => {
-    let newGroup = [...groups];
+    const newGroups = [...groups];
+    const currentGroup = newGroups[groupSelect.id];
+    const dateTime = new Date();
 
-    let Cgroup = newGroup[groupSelect.id];
+    const newNote = {
+      date: dateTime.toLocaleDateString([], { day: 'numeric', month: 'long', year: 'numeric' }),
+      time: dateTime.toLocaleTimeString('en-us', { hour: 'numeric', minute: 'numeric', hour12: true }),
+      note,
+    };
 
-    let time = `${new Date().toLocaleTimeString('en-us', {
-      hour: 'numeric',
-      minute: 'numeric',
-      hour12: true,
-    })}`;
-
-    let date = ` ${new Date().toLocaleDateString([], {
-      day: 'numeric',
-      month: 'long',
-      year: 'numeric',
-    })}`;
-
-    Cgroup['notes'].push({ date, time, note });
-    localStorage.setItem('groups', JSON.stringify(newGroup));
-    setGroups(newGroup);
+    currentGroup.notes.push(newNote);
+    localStorage.setItem('groups', JSON.stringify(newGroups));
+    setGroups(newGroups);
+    setNote(''); // Clear the input after submitting
   };
 
-  const keypress = (e) => {
-    if (e.code === 'Enter') {
+  // Handle Enter key press for submitting the note
+  const handleKeyPress = (event) => {
+    if (event.code === 'Enter') {
       handleSubmit();
-      setNote('');
     }
   };
 
+  // Function to render note items
+  const renderNotes = (notes) => notes.map((note, index) => (
+    <div key={index} className={styles.DateAndText}>
+      <div className={styles.DateAndTime}>
+        <p className={styles.Time}>{note.time}</p>
+        <p className={styles.Date}>{note.date}</p>
+      </div>
+      <p className={styles.Text}>{note.note}</p>
+    </div>
+  ));
+
   return (
-    <>
-      {screenSize.width < 989 ? (
-        <div className={styles.notesContainer}>
-          <div className={styles.notesHeader}>
-            <img
-              src={back}
-              alt={back}
-              onClick={() => {
-                window.location.reload();
-              }}
-            />
-            <div
-              className={styles.notesGroup}
-              style={{ background: groupSelect.color }}
-            >
-              {groupSelect.groupName?.slice(0, 2)?.toUpperCase()}
-            </div>
-            <h2 className={styles.groupName}>{groupSelect.groupName}</h2>
-          </div>
-          <div className={styles.NotesAndDateMobile}>
-            {notes.map((note) => (
-              <div className={styles.DateAndText}>
-                <div className={styles.DateAndTime}>
-                  <p className={styles.TimeMobile}>{note.time}</p>
-                  <p className={styles.DateMobile}>{note.date}</p>
-                </div>
-                <p className={styles.TextMobile}>{note.note}</p>
-              </div>
-            ))}
-          </div>
-          <div className={styles.TextareaMobile}>
-            <textarea
-              className={styles.TextInputMobile}
-              type="text"
-              value={note}
-              onChange={handleChange}
-              placeholder="Enter your text here..."
-              onKeyDown={keypress}
-            ></textarea>
-            <img
-              src={sendIcon}
-              className={styles.SendImgMobile}
-              alt="SendImg"
-              onClick={handleSubmit}
-            />
-          </div>
+    <div className={styles.notesContainer}>
+      <div className={styles.notesHeader}>
+        <img src={back} alt="Back" onClick={() => window.location.reload()} />
+        <div className={styles.notesGroup} style={{ background: groupSelect.color }}>
+          {groupSelect.groupName.slice(0, 2).toUpperCase()}
         </div>
-      ) : (
-        <div className={styles.notesContainer}>
-          <div className={styles.notesHeader}>
-            <div
-              className={styles.notesGroup}
-              style={{ background: groupSelect.color }}
-            >
-              {groupSelect.groupName?.slice(0, 2)?.toUpperCase()}
-            </div>
-            <h2 className={styles.groupName}>{groupSelect.groupName}</h2>
-          </div>
-          <div className={styles.NotesAndDate}>
-            {notes.map((note) => (
-              <div className={styles.DateAndText}>
-                <div className={styles.DateAndTime}>
-                  <p className={styles.Time}>{note.time}</p>
-                  <p className={styles.Date}>{note.date}</p>
-                </div>
-                <p className={styles.Text}>{note.note}</p>
-              </div>
-            ))}
-          </div>
-          <div className={styles.Textarea}>
-            <textarea
-              className={styles.TextInput}
-              type="text"
-              value={note}
-              onChange={handleChange}
-              placeholder="Enter your text here..."
-              onKeyDown={keypress}
-            ></textarea>
-            <img
-              src={sendIcon}
-              className={styles.SendImg}
-              alt="SendImg"
-              onClick={handleSubmit}
-            />
-          </div>
-        </div>
-      )}
-    </>
+        <h2 className={styles.groupName}>{groupSelect.groupName}</h2>
+      </div>
+      <div className={screenSize.width < 989 ? styles.NotesAndDateMobile : styles.NotesAndDate}>
+        {renderNotes(groupSelect.notes)}
+      </div>
+      <div className={screenSize.width < 989 ? styles.TextareaMobile : styles.Textarea}>
+        <textarea
+          className={screenSize.width < 989 ? styles.TextInputMobile : styles.TextInput}
+          value={note}
+          onChange={handleChange}
+          onKeyDown={handleKeyPress}
+          placeholder="Enter your text here..."
+        />
+        <img src={sendIcon} className={screenSize.width < 989 ? styles.SendImgMobile : styles.SendImg} alt="Send" onClick={handleSubmit} />
+      </div>
+    </div>
   );
 };
 

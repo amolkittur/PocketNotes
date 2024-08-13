@@ -1,3 +1,4 @@
+/* Basic layout for the notes header */
 .notesHeader {
   height: 58px;
   background: #e8e8e8;
@@ -6,165 +7,126 @@
   padding: 20px;
 }
 
+/* Circle container for group initials */
 .notesGroup {
   margin-left: 10px;
   width: 68px;
   height: 68px;
   color: #fff;
-  border-radius: 50px;
-  font-size: 24px;
-  align-items: center;
+  border-radius: 50%;
   display: flex;
+  align-items: center;
   justify-content: center;
+  font-size: 24px;
 }
+
+/* Styles for displaying the group name */
 .groupName {
   font-family: Roboto;
   font-weight: bold;
-  letter-spacing: 0.48px;
   margin-left: 20px;
   margin-bottom: 20px;
-}
-.NotesAndDate {
-  overflow-y: auto;
-  height: 60vh;
-  background-color: #f7ecdc;
+  letter-spacing: 0.48px;
 }
 
+/* Container for the notes and dates with a vertical scroll */
+.NotesAndDate, .NotesAndDateMobile {
+  overflow-y: auto;
+  background-color: #f7ecdc;
+  height: 60vh;
+}
+
+/* Responsive adjustments for mobile views */
+.NotesAndDateMobile {
+  height: 65vh;
+}
+
+/* Styling for each note's date and text container */
 .DateAndText {
   display: flex;
 }
 
-.Time {
+/* Time display settings */
+.Time, .TimeMobile {
   margin-left: 80px;
-  margin-top: 20px;
   margin-right: 100px;
-  margin-bottom: 0px;
-  color: #353535;
+  margin-top: 20px;
   font-family: Roboto;
   font-size: 15px;
   font-weight: bold;
-  line-height: 97%;
+  color: #353535;
   letter-spacing: 0.373px;
   width: 10vh;
 }
-.Date {
+
+/* Date display settings */
+.Date, .DateMobile {
   margin-top: 10px;
-  margin-right: 10px;
   margin-left: 80px;
-  color: #353535;
+  margin-right: 10px;
   font-family: Roboto;
   font-size: 15px;
   font-weight: bold;
-  line-height: 97%;
+  color: #353535;
   letter-spacing: 0.373px;
 }
 
-.Text {
-  display: flex;
+/* Text content styling */
+.Text, .TextMobile {
   margin-left: 20px;
   margin-right: 50px;
-}
-
-.Textarea {
-  margin: 10px;
-  margin-top: 15px;
-}
-
-.TextInput {
-  height: 18vh;
-  width: 72vw;
-  padding-left: 20px;
-  padding-top: 20px;
-  border-radius: 9px;
-  resize: none;
-  border: none;
-  font-family: Roboto;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.596px;
-}
-.TextInput::placeholder {
-  color: #9a9a9a;
-  font-family: Roboto;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.596px;
-}
-
-.SendImg {
-  position: absolute;
-  bottom: 30px;
-  right: 40px;
-  cursor: pointer;
-}
-.TimeMobile {
-  margin-left: 25px;
-  margin-top: 20px;
-  margin-right: 100px;
-  margin-bottom: 0px;
-  color: #353535;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 97%;
-  letter-spacing: 0.373px;
-  width: 10vh;
-}
-.DateMobile {
-  margin-top: 10px;
-  margin-right: 10px;
-  margin-left: 25px;
-  color: #353535;
-  font-family: Roboto;
-  font-size: 15px;
-  font-weight: bold;
-  line-height: 97%;
-  letter-spacing: 0.373px;
-}
-.SendImgMobile {
-  position: absolute;
-  right: 5%;
-  bottom: 2%;
-  cursor: pointer;
-}
-
-.TextareaMobile {
-  margin: 10px;
-  margin-top: 15px;
-  background-color: #e8e8e8;
-}
-.TextInputMobile {
-  height: 18vh;
-  width: 96%;
-  padding-left: 20px;
-  padding-top: 20px;
-  border-radius: 9px;
-  resize: none;
-  border: none;
-  font-family: Roboto;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.596px;
-}
-.TextInputMobile::placeholder {
-  color: #9a9a9a;
-  font-family: Roboto;
-  font-size: 20px;
-  font-weight: 400;
-  line-height: normal;
-  letter-spacing: 0.596px;
-}
-.NotesAndDateMobile {
-  overflow-y: auto;
-  height: 65vh;
-  background-color: #f7ecdc;
-}
-.TextMobile {
   display: flex;
-  margin-left: -38px;
-  margin-right: 20px;
+}
+
+/* Specific styles for mobile text display */
+.TextMobile {
   text-align: justify;
+  margin-left: 25px; /* Adjusted for alignment issues */
+}
+
+/* General styles for text input areas */
+.Textarea, .TextareaMobile {
+  margin: 10px 10px 15px;
+}
+
+/* Text input field styling */
+.TextInput, .TextInputMobile {
+  height: 18vh;
+  padding: 20px;
+  border-radius: 9px;
+  resize: none;
+  border: none;
+  font-family: Roboto;
+  font-size: 20px;
+  line-height: normal;
+  letter-spacing: 0.596px;
+}
+
+/* Responsive adjustments for mobile text input */
+.TextInputMobile {
+  width: 96%; /* Full width with some padding */
+}
+
+/* Placeholder styles for input fields */
+.TextInput::placeholder, .TextInputMobile::placeholder {
+  color: #9a9a9a;
+}
+
+/* Send button styling */
+.SendImg, .SendImgMobile {
+  position: absolute;
+  cursor: pointer;
+  right: 40px;
+  bottom: 30px;
+}
+
+/* Responsive adjustments for mobile send button */
+.SendImgMobile {
+  right: 5%; /* Slightly more towards the edge on mobile */
+  bottom: 2%;
+}
+
+/* Special styling for mobile textarea */
+.TextareaMobile {
+  background-color: #e8e8e8;
 }
